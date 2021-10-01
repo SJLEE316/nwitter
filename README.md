@@ -51,3 +51,17 @@ NWITTER
         └─ Swith : Switch를 사용하면 여러 가지 Route 중 하나만 렌더링 할 수 있다.
             └─ Route
   ```
+
+### 3.3 using router
+
+- 함수 컴포넌트는 상태관리를 위해 훅스(Hooks)를 사용한다.
+- `useState`는 인자로 [상태, 상태 관리 함수 이름]과 같은 형태의 배열을 입력받는다.
+- `<Route exact path="/">` : Route 컴포넌트의 exact path="/" 프롭스는 처음 접속했을 때의 경로이다. -> 루트 페이지
+
+#### 공식문서
+
+- [리액트 상태](https://ko.reactjs.org/docs/faq-state.html)
+- [리액트 훅스](https://ko.reactjs.org/docs/hooks-intro.html)
+- [리액트 useState 함수](https://ko.reactjs.org/docs/hooks-state.html)
+- [ES6 구조 분해 할당](https://ko.javascript.info/destructuring-assignment)
+- [리액트 프롭스](https://ko.reactjs.org/docs/components-and-props.html)

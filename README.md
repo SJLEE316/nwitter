@@ -6,25 +6,32 @@ Twitter (mini)clone with React and Firebase
 
 ```
 NWITTER
-├─ src
-│   ├─ components
-│   │   ├─ App.js : IsLoggedIn 상태 관리
-│   │   └─ Router.js
-│   │         └─ HashRouter
-│   │             └─ Swith : Switch를 사용하면 여러 가지 Route 중 하나만 렌더링 할 수 있다.
-│   │                 └─ Route
-│   ├─ routes
-│   │   ├─ Auth.js
-│   │   ├─ Editprofile.js
-│   │   ├─ Home.js
-│   │   └─ Profile.js
-│   ├─ firebase.js
-│   └─ index.js
-├─ .env
-├─ .gitignore
-├─ jsconfig.json
-├─ README.md
-└─
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── .env
+├── jsconfig.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├── firebase.js
+    ├── index.js
+    │   ├── App.js : IsLoggedIn 상태 관리
+    │   └── Router.js
+    │       └── HashRouter
+    │           └── Swith : Switch를 사용하면 여러 가지 Route 중 하나만 렌더링 할 수 있다.
+    │               └── Route
+    └── routes
+        ├── Auth.js
+        ├── Editprofile.js
+        ├── Home.js
+        └── Profile.js
 ```
 
 ### 2.3 create-react-app

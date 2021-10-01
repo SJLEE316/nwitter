@@ -1,5 +1,6 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from "firebase/compat/app"; // firebase/compat/app에 포함된 모든 모듈을 firebase라는 객체에 부여
+import "firebase/compat/auth"; // 인증 모듈을 사용할 것이므르 인증 모듈을 import
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,4 +13,6 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export default firebase.initializeApp(firebaseConfig); // firebase 객체에서 initializeApp 함수를 사용
+// export default firebase.initializeApp(firebaseConfig); // firebase 객체에서 initializeApp 함수를 사용
+firebase.initializeApp(firebaseConfig); // 다른 파일에서 참조할 필요 없으므로 fbase.js 파일 안에서 실행되도록 코드 수정
+export const authService = firebase.auth(); // 로그인을 위한 firebase.auth()는 다른 파일에서 참조할 것이므로 authService에 담아 내보내도록 코드 추가

@@ -1,10 +1,12 @@
-import { React, useState } from "react";
+import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import Auth from "../routes/Auth";
-import Home from "../routes/Home";
+// import Auth from "../routes/Auth";
+// import Home from "../routes/Home";
+import Auth from "routes/Auth"; // 절대경로로 바꾸어주었다.
+import Home from "routes/Home";
 
-const Router = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 초기값은 false이고, setInLoggedIn은 변수가 아니라 isLoggedIn을 변경할 때 사용하는 함수
+const Router = ({ isLoggedIn }) => {
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // App.js로 이동
   return (
     <HashRouter>
       <Switch>

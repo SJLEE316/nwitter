@@ -8,7 +8,7 @@ Twitter (mini)clone with React and Firebase
 NWITTER
 ├─ src
 │   ├─ components
-│   │   ├─ App.js
+│   │   ├─ App.js : IsLoggedIn 상태 관리
 │   │   └─ Router.js
 │   │         └─ HashRouter
 │   │             └─ Swith : Switch를 사용하면 여러 가지 Route 중 하나만 렌더링 할 수 있다.
@@ -22,6 +22,7 @@ NWITTER
 │   └─ index.js
 ├─ .env
 ├─ .gitignore
+├─ jsconfig.json
 ├─ README.md
 └─
 ```
@@ -65,3 +66,31 @@ NWITTER
 - [리액트 useState 함수](https://ko.reactjs.org/docs/hooks-state.html)
 - [ES6 구조 분해 할당](https://ko.javascript.info/destructuring-assignment)
 - [리액트 프롭스](https://ko.reactjs.org/docs/components-and-props.html)
+
+### 4.1 setting firebase login
+
+- 코드의 가독성을 위해 상대경로에서 절대경로로 변경한다. jsconfig.json파일을 만들고, 이 파일은 리액트에 사용할 자바스크립트를 위한 설정파일이다. 아래 코드는 src 폴더를 기준으로 폴더나 파일 경로를 적을 수 있어 import 문의 가독성이 좋아진다.
+  ```
+  {
+  "compilerOptions" : {
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+  }
+  ```
+- 절대 경로의 아쉬운 점은 파일 이름과 npn install로 설치한 패키지 이름이 같으면 오류가 발생한다. firebase라는 패키지를 설치하였기 때문에 파일 이름을 firebase에서 fbase로 바꾸어준다.
+- 여러 모듈을 내보낼 수 있는 named export 적용하였다.
+
+> **모듈 단위로 임포트 하는 이유**<br>
+> 파이어베이스와 같은 노드 패키지에는 보통 여러가지 기능이 들어 있어 파일의 크기가 크다. 패키지 전체 내용을 임포트하면 프로그램이 무거워지고, 사용하지 않을 기능까지 임포드된다. 따라서 필요한 모듈만 임포트하여 사용한다.
+
+> **`React.StrictMode`란**<br>
+> CRA로 만든 리액트 프로젝트는 기본으로 index.js파일에 React.StrictMode를 설정한다. 이 설정을 지우지 않으면 console.log 함수가 2번 실행되는 현상이 나타난다. 이는 버그가 아니라 개발 상황에서 의도적으로 console.log함수를 2번 호출하도록 만든 것이고, 이를 통해 오류를 더 쉽게 포착할 수 있다. <br> [React.Stricmode](https://ko.reactjs.org/docs/strict-mode.html)
+
+#### 공식문서
+
+- [리액트 JSX](https://ko.reactjs.org/docs/introducing-jsx.html)
+- [default export와 named export](https://ko.javascript.info/import-export)
+- [ES6 구조 분해 할당](https://ko.javascript.info/destructuring-assignment)
+- [Importing a Component](https://create-react-app.dev/docs/importing-a-component/)
+- [비주얼 스튜디오 코드 jsconfig.json](https://code.visualstudio.com/docs/languages/jsconfig)

@@ -94,6 +94,15 @@ NWITTER
 > **`React.StrictMode`란**<br>
 > CRA로 만든 리액트 프로젝트는 기본으로 index.js파일에 React.StrictMode를 설정한다. 이 설정을 지우지 않으면 console.log 함수가 2번 실행되는 현상이 나타난다. 이는 버그가 아니라 개발 상황에서 의도적으로 console.log함수를 2번 호출하도록 만든 것이고, 이를 통해 오류를 더 쉽게 포착할 수 있다. <br> [React.Stricmode](https://ko.reactjs.org/docs/strict-mode.html)
 
+### 4.2 setting login form
+
+> **submit 이벤트는 새로고침이 되는 문제가 있다**<br>
+> submit 이벤트는 페이지를 새로고침한다. 이 때문에 리액트 상태가 초기화되는 현상이 발생하는데, 이 현상을 막기 위해 onSubmit 함수에서 이벤트의 기본값을 막는 event.preventDefault()를 사용한다.
+
+#### 공식문서
+
+- [input 엘리먼트와 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input)
+
 #### 공식문서
 
 - [리액트 JSX](https://ko.reactjs.org/docs/introducing-jsx.html)

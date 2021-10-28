@@ -103,6 +103,34 @@ NWITTER
 
 - [input 엘리먼트와 속성](https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input)
 
+### 4.3 create user
+
+- async & await : authService에 들어 있는 함수들은 서버로 값을 요청해서 결괏값을 수신 받기까지 시간이 걸린다. 수신받고 실행하라는 뜻이다.
+- firebase에서 회원가입 정보 확인 가능하다. (email : good@gmail.com, password : goodgood)
+- 로그인 유지하기
+
+  ```
+  <setPersistence의 세 가지 옵션>
+
+  - local : 웹 브라우저를 종료해도 로그인 유지 (기본값)
+  - session: 웹 브라우저의 탭을 종료하면 로그아웃
+  - none : 새로고침하면 로그아웃
+  ```
+
+  ```
+  <사용자 정보가 저장되어 있는 곳>
+
+  개발자 도구 > Application > Storage > IndexedDB > firebaseLocalStorageDb - ... > firebaseLocalStorage
+  의 Value 항목을 펼치면 사용자 정보를 확인할 수 있다. value.email에 회원가입 시 입력한 이메일이 들어있다.
+  ```
+
+  > **IndexedDB?**<br>
+  > IndexedDB는 웹 브라우저에 내장된 데이터베이스이다. JSON 구조로 데이터를 저장하여 자바스크립트로 다루기 좋다. 여기서는 따로 데이터를 저장하기 위한 코드를 작성하지 않고, 파이어베이스가 처리해주었다.
+
+#### 공식문서
+
+- [async와 await](https://ko.javascript.info/async-await)
+
 #### 공식문서
 
 - [리액트 JSX](https://ko.reactjs.org/docs/introducing-jsx.html)

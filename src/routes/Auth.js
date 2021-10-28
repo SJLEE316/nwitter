@@ -1,4 +1,4 @@
-import { authService } from "fbase";
+import { authService, firebaseInstance } from "fbase";
 import { React, useState } from "react";
 
 const Auth = () => {
@@ -8,7 +8,7 @@ const Auth = () => {
   const [error, setError] = useState(""); // 에러가 발생할 지점에 setError 함수를 사용한다.
 
   const onChange = (event) => {
-    console.log(event.target.name); // email 입력과 password 입력을 구분하기 위해 2가지 함수를 만드는 방법보다 event.target.name으로 input 엘리먼트를 구분하는 방법이 더 효율적이다.
+    // console.log(event.target.name); // email 입력과 password 입력을 구분하기 위해 2가지 함수를 만드는 방법보다 event.target.name으로 input 엘리먼트를 구분하는 방법이 더 효율적이다.
     const {
       target: { name, value }, // event.target으로 name과 value를 가져온다. .구조분해할당
     } = event;
@@ -45,6 +45,22 @@ const Auth = () => {
   const toggleAccount = () => setNewAccount((prev) => !prev);
   // useState 함수에 함수를 인자로 전달하면 인자로 전달한 함수의 1번째 인자(prev)에 이전의 상태 넘어온다.
 
+  // 소셜 로그인 진행하는 signInWithPopup 함수는 비동기 작업이어서 async-await 사용
+  const onSocialClick = async (event) => {
+    // console.log(event.target.name);
+    const {
+      target: { name },
+    } = event;
+    let provider;
+    if (name == "google") {
+      provider = new firebaseInstance.auth.GoogleAuthProvider(); // 소셜 로그인 서비스 제공 업체
+    } else if (name == "github") {
+      provider = new firebaseInstance.auth.GithubAuthProvider();
+    }
+    const data = await authService.signInWithPopup(provider);
+    console.log(data);
+  };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -72,8 +88,12 @@ const Auth = () => {
       </span>
       <div>
         {/* firebase에 로그인 요청하는 버튼 -> 서버 호출 */}
-        <button>Continue with Google</button>
-        <button>Continue with Github</button>
+        <button onClick={onSocialClick} name="google">
+          Continue with Google
+        </button>
+        <button onClick={onSocialClick} name="github">
+          Continue with Github
+        </button>
       </div>
     </div>
   );

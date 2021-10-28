@@ -16,3 +16,4 @@ const firebaseConfig = {
 // export default firebase.initializeApp(firebaseConfig); // firebase 객체에서 initializeApp 함수를 사용
 firebase.initializeApp(firebaseConfig); // 다른 파일에서 참조할 필요 없으므로 fbase.js 파일 안에서 실행되도록 코드 수정
 export const authService = firebase.auth(); // 로그인을 위한 firebase.auth()는 다른 파일에서 참조할 것이므로 authService에 담아 내보내도록 코드 추가
+export const firebaseInstance = firebase; // 소셜 로그인에 필요한 provider는 firebase에 있으므로 firebase 전체를 익스포트한다.

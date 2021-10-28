@@ -148,6 +148,18 @@ NWITTER
 
 ### 4.5 social login
 
+### 4.6 navigation and logout
+
+- && : 자바스크립트 and 연산. && 왼쪽의 조건이 true이면 && 오른쪽에 있는 값을 반환한다.
+- 로그아웃 후 주소 이동하기
+  - 방법 1. Redirect 이용하기
+    - Route 다음에 Redirect를 배치해서 Switch 내부에 있는 Route 조건이 다 맞지 않으면 Redirect가 지정한 곳으로 주소를 이동한다.
+    - Redirect는 from 프롭스에 있는 값을 조건으로 생각해서 to 프롭스에 있는 값으로 주소를 이동시킨다.
+  - 방법 2. useHistory 이용하기
+    - 자바스크립트로 리다이렉트 시킨다. 로그아웃을 처리하는 자바스크립트 코드 마지막에 처음 화면으로 이동하라는 명령을 내린다.
+    - useHistory의 push라는 함수가 주소를 이동시킨다.
+    - 브라우저에는 사용자의 주소 이동 발자취를 기록해서 history에 저장하고, useHistory는 리액트에서 브라우저의 history를 사용할 수 있게 한다.
+
 #### 공식문서
 
 - [리액트 JSX](https://ko.reactjs.org/docs/introducing-jsx.html)

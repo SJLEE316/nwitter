@@ -7,7 +7,7 @@ import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
 
-const Router = ({ isLoggedIn }) => {
+const Router = ({ isLoggedIn, userObj }) => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // App.js로 이동
   return (
     <HashRouter>
@@ -20,7 +20,7 @@ const Router = ({ isLoggedIn }) => {
           <>
             <Route exact path="/">
               {/* Route 컴포넌트의 exact path="/" 프롭스는 처음 접속했을 때의 경로이다. -> 루트 페이지 */}
-              <Home />
+              <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
               <Profile />

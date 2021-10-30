@@ -160,6 +160,17 @@ NWITTER
     - useHistory의 push라는 함수가 주소를 이동시킨다.
     - 브라우저에는 사용자의 주소 이동 발자취를 기록해서 history에 저장하고, useHistory는 리액트에서 브라우저의 history를 사용할 수 있게 한다.
 
+### 5.1 creating tweet
+
+- Create : `add()`
+- Read : `get()`
+- Update와 Delete는 파이어베이스에서 데이터를 구별하기 위해 아이디를 사용한다. -> `document.id`
+- useEffect : async-await 문을 쓰는 함수가 useEffect에 포함되어 있으면, 그 함수는 따로 빼서 정의하고 useEffect에서 그 함수를 실행시켜야 한다.
+
+#### 공식문서
+
+- [전개구문(spread syntex)](https://ko.javascript.info/rest-parameters-spread#spread-syntax)
+
 #### 공식문서
 
 - [리액트 JSX](https://ko.reactjs.org/docs/introducing-jsx.html)

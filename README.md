@@ -22,16 +22,16 @@ NWITTER
 └── src
     ├── firebase.js
     ├── index.js
-    │   ├── App.js : IsLoggedIn 상태 관리
-    │   └── Router.js
-    │       └── HashRouter
-    │           └── Swith : Switch를 사용하면 여러 가지 Route 중 하나만 렌더링 할 수 있다.
-    │               └── Route
     └── routes
-        ├── Auth.js
-        ├── Editprofile.js
-        ├── Home.js
-        └── Profile.js
+    │   ├── Auth.js
+    │   ├── Editprofile.js
+    │   ├── Home.js
+    │   └── Profile.js
+    └── components
+        ├── App.js : IsLoggedIn 상태 관리
+        ├── Navigation.js
+        ├── Nweet.js
+        └── Router.js
 ```
 
 ### 2.3 create-react-app
@@ -175,6 +175,10 @@ NWITTER
 
 - 실시간 데이터베이스는 채팅 애플리케이션을 만들 때 유용하다. 데이터베이스 변화를 실시간으로 감지하고, 변화가 감지되면 곧바로 파이어베이스 라이브러리 함수를 실생시킨다. 파이어베이스 데이터베이스 방법을 도입하면, 서버와 데이터를 주고 받는 것, 에러 및 결과 처리 등을 파이어베이스가 알아서 처리해준다. 또한 데이터베이스와 통신할 때 async-await 문을 쓰지 않아도 된다. 파이어베이스에서는 `get()`함수 대신 `onSnapshot()`함수를 사용한다.
 - map 함수는 forEach함수보다 효율적이다. forEach함수는 배열 요소를 순회하면서 매 순회마다 배열을 만들어줘야하지만, map 함수는 순회하면서 배열을 리턴한다.
+
+### 5.3 deleting tweet
+
+- 컴포넌트 분리하기
 
 #### 공식문서
 

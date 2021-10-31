@@ -7,19 +7,29 @@ const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState(""); // 문서 한 개
   const [nweets, setNweets] = useState([]); // 컬랙션 전체
 
-  const getNweets = async () => {
-    const dbNweets = await dbService.collection("nweets").get(); // 문서의 개수가 많으면 get()을 한 번만 실행해서는 안된다.
-    // console.log(dbNweets); // 스냅샷(파이어베이스의 원본). 우리가 원하는 데이터는 스냅샷 속에 숨어 있다.
-    // dbNweets.forEach((document) => console.log(document.data())); // 여러 개의 문서 스냅샷을 순회하기 위해 forEach 함수를 사용. 우리가 원하는 데이터는 data() 함수로 얻을 수 있다.
-    dbNweets.forEach((document) => {
-      const nweetObject = { ...document.data(), id: document.id };
-      setNweets((prev) => [nweetObject, ...prev]); // 전개구문 -> 데이터를 쌓는다.
-      // setNweets((prev) => [document.data(), ...prev]); // 전개구문
-    });
-  };
+  // 실시간 렌더링이 불가능하다.
+  // const getNweets = async () => {
+  //   const dbNweets = await dbService.collection("nweets").get(); // 문서의 개수가 많으면 get()을 한 번만 실행해서는 안된다.
+  //   // console.log(dbNweets); // 스냅샷(파이어베이스의 원본). 우리가 원하는 데이터는 스냅샷 속에 숨어 있다.
+  //   // dbNweets.forEach((document) => console.log(document.data())); // 여러 개의 문서 스냅샷을 순회하기 위해 forEach 함수를 사용. 우리가 원하는 데이터는 data() 함수로 얻을 수 있다.
+  //   dbNweets.forEach((document) => {
+  //     const nweetObject = { ...document.data(), id: document.id };
+  //     setNweets((prev) => [nweetObject, ...prev]); // 전개구문 -> 데이터를 쌓는다.
+  //     // setNweets((prev) => [document.data(), ...prev]); // 전개구문
+  //   });
+  // };
 
   useEffect(() => {
-    getNweets();
+    // getNweets();
+    dbService.collection("nweets").onSnapshot((snapshot) => {
+      // get함수에서 onSnapshot 함수로 바꾸었다. onSnapshot은 get 함수처럼 스냅샷을 반환하고, 그 안의 문서 스냅샷들은 docs로 얻어낸다.
+      // map 함수를 적용하면 문서 스냅샷에서 원하는 값만 뽑아 다시 배열화할 수 있다.
+      const newArray = snapshot.docs.map((document) => ({
+        id: document.id,
+        ...document.data(),
+      }));
+      setNweets(newArray);
+    });
   }, []);
 
   // console.log(nweets);

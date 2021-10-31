@@ -179,6 +179,11 @@ NWITTER
 ### 5.3 deleting tweet
 
 - 컴포넌트 분리하기
+- Delete : `delete()`
+
+### 5.4 updating tweet
+
+- Update : `update()`
 
 #### 공식문서
 

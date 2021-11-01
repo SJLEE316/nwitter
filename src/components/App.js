@@ -35,7 +35,7 @@ function App() {
       ) : (
         "initializing..."
       )}
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+      {/* <footer>&copy; {new Date().getFullYear()} Nwitter</footer> */}
       {/* JSX에 자바스크립트 코드를 삽입할 때는 코드를 중괄호로 감사줘야 한다. 
       &copy; 는 JSX에서 copyright 기호를 출력한다.*/}
     </>

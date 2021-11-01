@@ -7,6 +7,7 @@ const Home = ({ userObj }) => {
 
   const [nweet, setNweet] = useState(""); // 문서 한 개
   const [nweets, setNweets] = useState([]); // 컬랙션 전체
+  const [attachment, setAttachment] = useState(""); // 사진 미리보기
 
   // 실시간 렌더링이 불가능하다.
   // const getNweets = async () => {
@@ -56,6 +57,29 @@ const Home = ({ userObj }) => {
     setNweet(value);
   };
 
+  const onFileChange = (event) => {
+    // console.log(event.target.files); // 파일 관련 내용 확인
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0]; // 1개의 파일만 선택하기 때문에 0 인덱스로 설정한다.
+    // 웹 브라우저에 사진 출력하기 -> 해킹, 보안 문제 때문에 URL을 얻는 과정이 복잡하다.
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      // onloadend : 파일이 함수로 들어간 이후 결괏값이 나온 다음 상황을 감지
+      // console.log(finishedEvent);
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result); // result 항목을 바로 얻기 위해 구조 분해 할당 사용
+    };
+    reader.readAsDataURL(theFile); // 시점까지 관리를 해주어야 사용 가능
+  };
+
+  const onClearAttachment = () => {
+    setAttachment("");
+  };
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -66,7 +90,15 @@ const Home = ({ userObj }) => {
           placeholder="What's on your mind?"
           maxLength={120} // 글자수 제한
         />
+        {/* type을 다양한 방법으로 사용 가능. 사진만 등록하고 싶아면 accept 속성을 사용한다. (첨부 파일의 종류를 제한할 수 있다.) */}
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Nweet" />
+        {attachment && (
+          <div>
+            <img src={attachment} width="50px" height="59px" />
+            <button onClick={onClearAttachment}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {nweets.map((nweet) => (

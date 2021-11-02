@@ -2,6 +2,7 @@
 import firebase from "firebase/compat/app"; // firebase/compat/app에 포함된 모든 모듈을 firebase라는 객체에 부여
 import "firebase/compat/auth"; // 인증 모듈을 사용할 것이므르 인증 모듈을 import
 import "firebase/compat/firestore"; // 파이어베이스 데이터베이스를 사용
+import "firebase/compat/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,3 +20,4 @@ firebase.initializeApp(firebaseConfig); // 다른 파일에서 참조할 필요 
 export const authService = firebase.auth(); // 로그인을 위한 firebase.auth()는 다른 파일에서 참조할 것이므로 authService에 담아 내보내도록 코드 추가
 export const firebaseInstance = firebase; // 소셜 로그인에 필요한 provider는 firebase에 있으므로 firebase 전체를 익스포트한다.
 export const dbService = firebase.firestore(); // 파이어베이스 데이터베이스를 사용하기 위해 익스포트한다.
+export const storageService = firebase.storage();

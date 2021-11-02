@@ -1,4 +1,4 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import { React, useState } from "react";
 
 const Nweet = ({ nweetObj, isOwner }) => {
@@ -9,12 +9,16 @@ const Nweet = ({ nweetObj, isOwner }) => {
   // onSnapshot 함수를 사용할 떄는 async-await 문이 없어도 되지만, 있어도 똑같이 동작한다. onSnapshot 함수를 다른 함수로 교체할 때를 대비하여 async-await 문을 쓰는 것을 권장한다.
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제하시겠습니까?");
-    console.log(ok);
+    // console.log(ok);
     if (ok) {
       // console.log(nweetObj.id); // 문서 id 불러오기
       // const data = await dbService.doc(`nweets/${nweetObj.id}`); // 문서 불러오기
-      const data = await dbService.doc(`nweets/${nweetObj.id}`).delete(); // 문서 삭제하기
-      console.log(data);
+      // const data = await dbService.doc(`nweets/${nweetObj.id}`).delete(); // 문서 삭제하기
+      // console.log(data);
+      await dbService.doc(`nweets/${nweetObj.id}`).delete(); // 문서 삭제하기
+      if (nweetObj.attachmentUrl !== "") {
+        await storageService.refFromURL(nweetObj.attachmentUrl).delete(); // refFromURL 함수를 사용하면 attachmentUrl만으로 스토리지에서 해당 파일의 위치를 바로 찾아 삭제할 수 있다.
+      }
     }
   };
 
@@ -49,6 +53,9 @@ const Nweet = ({ nweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{nweetObj.text}</h4>
+          {nweetObj.attachmentUrl && (
+            <img src={nweetObj.attachmentUrl} width="50px" height="50px" />
+          )}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete Nweet</button>

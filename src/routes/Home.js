@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import Nweet from "../components/Nweet";
+import { v4 as uuidv4 } from "uuid"; // uuidv4 함수를 실행시키면 된다.
 
 const Home = ({ userObj }) => {
   // console.log(userObj); // uid(user id) -> 사용자를 구분할 수 있음
@@ -38,15 +39,25 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    // Promise를 반환하므로 async-await 문을 사용
-    // nweets라는 컬렉션 생성
+    let attachmentUrl = ""; // 기본값을 빈 문자열
+    if (attachment !== "") {
+      // Promise를 반환하므로 async-await 문을 사용
+      // nweets라는 컬렉션 생성
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`); // 스토리지, 레퍼런스를 순서대로 호출한 다음 child 함수에 사용자 아이디를 폴더 이름으로, 파일 이름을 uuidv4로 처리한다.
+      const response = await attachmentRef.putString(attachment, "data_url"); // putString(파일 URL, 첫 번째 인자 형식을 문자열로 전달) : 해당 파일이 스토리지에 저장된다.
+      attachmentUrl = await response.ref.getDownloadURL(); // 스토리지에서 사진 불러오기. 스냅샷 레퍼런스 이용. getDownloadURL 함수는 파일을 다운로드할 수 있는 스토리지의 URL을 반환한다.
+    }
     await dbService.collection("nweets").add({
       // 해당 컬렉션의 문서 생성
       text: nweet, // nweet을 text 필드로 저장
       createdAt: Date.now(), // 숫자가 클수록 최근에 등록한 데이터
       creatorId: userObj.uid,
+      attachmentUrl,
     });
     setNweet(""); // 저장을 하면 nweet 상태를 빈 문자열로 초기화
+    setAttachment(""); // 초기화
   };
 
   const onChange = (event) => {
